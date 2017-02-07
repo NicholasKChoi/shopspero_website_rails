@@ -1,3 +1,75 @@
-div {
-    // border:1px solid black;
+html {
+    -webkit-font-smoothing: antialiased;
+}
+
+
+.header {
+    color: inherit;
+    a.header_link{
+        font-family: 'Josefin Slab', serif;
+        font-size:55px;
+        text-decoration: none;
+        color: inherit;
+        letter-spacing: 2px;
+        text-align: center;
+        /*padding: 10px;*/
+        /*margin-top:20px;*/
+        display:block;
+        padding-top: 40px;
+    }
+}
+
+.navigation {
+    li {
+        display: inline;
+    }
+    ul {
+        list-style-type: none;
+        text-align: center;
+        -webkit-padding-start: 0px;
+        width: 100%;
+    }
+    a {
+        text-decoration: none;
+        color:inherit;
+        font-size:15px;
+        font-family: 'Raleway', sans-serif;
+        margin: 5px 15px 5px 15px;
+        &:hover {
+            color:gray;
+        }
+    }
+}
+
+.button {
+    z-index: 10;
+    cursor: pointer;
+    position: absolute;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    border: solid #9E9E9E 1px;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    margin: 0.75em;
+    box-sizing: border-box;
+    a {
+        text-decoration: none;
+        &:visited {
+            color: inherit;
+        }
+    }
+    &:hover {
+        color: gray;
+    }
+}
+.smtext {
+    font-size: 14px;
+    padding: 3px 8px 3px 8px;
+    border-radius: 3px;
+}
+.medtxt {
+    font-size: 20px;
+    font-weight: 800;
+    padding: 8px 16px 8px 16px;
+    border-width: 2px;
 }

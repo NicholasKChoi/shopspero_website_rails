@@ -1,1 +1,23 @@
-<h1> INDEX ROOT PAGE </h1>
+<!--<div class="main_image">-->
+<!--    <img src="http://www.adweek.com/files/imagecache/node-detail/news_article/tt-dorito-dog-days-hed2-2013.jpg">-->
+<!--</div>-->
+<div class="header_container index_header" onmouseover="this.style.background='white';  this.style.color='black';" 
+    onmouseout="this.style.background='rgba(255, 255, 255, 0.0)'; this.style.color='white';">
+    <div class="header">
+        <a class="header_link" href="/shop/">SHOP SPERO</a>
+        <div class="navigation">
+            <ul>
+                <%= link_to 'Originals', shop_page_path('Originals') %>
+                <%= link_to 'Women', shop_page_path('Women') %>
+                <%= link_to 'Men', shop_page_path('Men') %>
+                <%= link_to 'About', shop_page_path('About') %>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="enter_shop" class="button medtxt">
+  <%= link_to 'ENTER SHOP', shop_path %>
+</div>
+<div class="background_img">
+    
+</div>
