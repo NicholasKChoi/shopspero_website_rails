@@ -68,7 +68,7 @@ var ShopApp = React.createClass({
             </div>
           <h3> {this.props.query} </h3> 
         </div>
-        <ul className="items_list">
+        <ul className="items-list">
           {this.state.items.map(function (item) {
             return (
               <li key={item.id}> 
@@ -88,13 +88,13 @@ var ItemBox = React.createClass({
   render: function() {
     // <div className='button smtext'> Delete </div> remove for now, probably going to have delete button in edit form
     return (
-    <div className='itembox_container'>
+    <div className='itembox-container'>
       <div 
         className='button smtext' 
         onClick={function() {this.props.rendersForm(this.props.id);}.bind(this) }>
         Edit
       </div>
-      <div className='item_desc'> <p> {this.props.id} Item Name {this.props.name}; $100</p> </div>
+      <div className='item-desc'> <p> {this.props.id} Item Name {this.props.name}; $100</p> </div>
       <img src="http://www.myfamily.it/content/images/thumbs/0024087.jpeg"></img>
     </div>
     );
@@ -106,7 +106,7 @@ var ItemForm = React.createClass({
   render: function() {
     if (this.props.isRender) {
       return (
-        <form className="item_formedit">
+        <form className="item-formedit">
           <label>
             Name:
             <input type="text" name="name" />
