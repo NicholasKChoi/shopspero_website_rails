@@ -5,6 +5,19 @@ var ShopApp = React.createClass({
   },
   
   getInitialState: function() {
+    let xhttp = new XMLHttpRequest();
+    let shopApp = this;
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        let itemjson = JSON.parse(this.responseText);
+        console.log(itemjson);
+        shopApp.setItemList(itemjson);
+      }
+    };
+    
+    xhttp.open("GET", "/api/v1/shop/index", true);
+    xhttp.send();
+    
     return{ 
             items: [{id: 1, name: "A"}, {id: 2, name: "B"}, {id:3, name: "C"}, 
                     {id:4, name: "D"}, {id:5, name: "E"}, {id:6, name: "F"}],
@@ -17,14 +30,30 @@ var ShopApp = React.createClass({
     return { query: "Originals" };
   },
   
+  setItemList: function(items) {
+    this.setState(function(prevState, props) {
+      prevState.items = items;
+      return prevState;
+    });
+  },
+  
   rendersForm: function(id) {
     this.setState(function(prevState, props) {
       prevState.renderFormIds.push(id);
-      return prevState
+      return prevState;
     });
   },
   
   render: function() {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       console.log(this.responseText);
+      }
+    };
+    xhttp.open("GET", "/api/v1/shop/index", true);
+    xhttp.send();
+    
     console.log(this.props.query);
     return (
       <div className='shopApp-container'>

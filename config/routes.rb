@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   get 'shop/:query', to: 'shop#pagecontainer', as: 'shop_page'
+  get 'api/v1/shop/index', to: 'shop#index', as: 'shop_index' 
   get 'shop', to: 'shop#pagecontainer', as: 'shop'
   
   get 'cart' => 'shop#cart'
