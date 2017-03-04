@@ -7,12 +7,16 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   get 'shop/:query', to: 'shop#pagecontainer', as: 'shop_page'
-  get 'api/v1/shop/index', to: 'shop#index', as: 'shop_index' 
   get 'shop', to: 'shop#pagecontainer', as: 'shop'
   
   get 'cart' => 'shop#cart'
 
+  # API routes in the shop index.
+  get 'api/v1/shop/index', to: 'shop#index', as: 'shop_index' 
+  post 'api/v1/shop/create', to: 'shop#create', as: 'shop_create'
+  post 'api/v1/shop/update', to: 'shop#update', as: 'shop_update'
   #   get 'products/:id' => 'catalog#view'
+  delete 'api/v1/shop/delete', to: 'shop#delete', as: 'shop_delete'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
