@@ -16,6 +16,7 @@
 //= require react_ujs
 //= require jquery_ujs
 //= require components
+//= require index
 //= require_tree .
 
 ready = function() {

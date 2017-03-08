@@ -3,7 +3,48 @@
 // add field for updating quantity instead of static
 // MOST IMPORTANT----> CSS IT SO IT LOOKS PRETTY
 
+class Item extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+                  quantity: props.quantity, 
+                  name: props.name,
+                  id: props.id
+    };
+    
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(event) {
+    this.props.quantity = event.target.value;
+  }
+};
 
+var Field = React.createClass({
+    //transfer props to state on load
+    getInitialState: function () {
+        return {value: this.props.value, item: this.props.item};
+    },
+    //if the parent component updates the prop, force re-render
+    componentWillReceiveProps: function(nextProps) {
+         this.setState({value: nextProps.value});
+    },
+    //re-render when input changes
+    _handleChange: function (e){
+        this.setState({value: e.target.value});
+        this.state.item.handleChange(e);
+        console.log(this.state.item.props.quantity);
+    },
+    render: function () {
+        // render based on state
+        return (
+            <div>
+                <input type="text" onChange={this._handleChange} 
+                                   value={this.state.value || ''} />
+            </div>
+        );
+    }
+});
 
 var CartApp = React.createClass({
 
@@ -13,8 +54,10 @@ var CartApp = React.createClass({
 
   getInitialState: function(){
     return{
-      items: [{id:1, name: 'A', quantity: 1}, {id:2, name: 'B', quantity: 1}, {id:3, name: 'C', quantity: 4}, 
-              {id:4, name: 'D', quantity: 1}, {id:5, name: 'E', quantity: 1}, {id:6, name: 'F', quantity: 1}]
+      // items: [{id:1, name: 'A', quantity: 1}, {id:2, name: 'B', quantity: 1}, {id:3, name: 'C', quantity: 4}, 
+              // {id:4, name: 'D', quantity: 1}, {id:5, name: 'E', quantity: 1}, {id:6, name: 'F', quantity: 1}]
+      
+      items: [new Item({id: 1, name: 'A', quantity: 1})]
 
     }
   },
@@ -26,15 +69,16 @@ var CartApp = React.createClass({
 
   
   render: function() {
-    console.log(this.props.query);
+    // console.log(this.props.query);
     return (
       <div className='cartApp-container'>
 
         <ul className="cartitems_list">
           {this.state.items.map(function (item) {
             return (
-              <li key={item.id}> 
-                <ItemInfo pic={item.pic} id={item.id} name={item.name} quantity={item.quantity} cost={item.cost * item.quantity}/>
+              <li key={item.id}>
+                <Field value={item.props.quantity} item={item} onChange={this._handleChange} />
+                <ItemInfo pic={item.pic} id={item.props.id} name={item.props.name} quantity={item.props.quantity} cost={item.cost * item.quantity}/>
               </li>);
           }.bind(this)) }
         </ul>
