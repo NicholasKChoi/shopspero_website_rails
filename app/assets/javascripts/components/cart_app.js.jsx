@@ -33,7 +33,7 @@ var Field = React.createClass({
     _handleChange: function (e){
         this.setState({value: e.target.value});
         this.state.item.handleChange(e);
-        console.log(this.state.item.props.quantity);
+        // console.log(this.state.item.props.quantity);
     },
     render: function () {
         // render based on state
@@ -57,7 +57,15 @@ var CartApp = React.createClass({
       // items: [{id:1, name: 'A', quantity: 1}, {id:2, name: 'B', quantity: 1}, {id:3, name: 'C', quantity: 4}, 
               // {id:4, name: 'D', quantity: 1}, {id:5, name: 'E', quantity: 1}, {id:6, name: 'F', quantity: 1}]
       
-      items: [new Item({id: 1, name: 'A', quantity: 1})]
+      // handle passed in items to cart
+      items: this.props.data.map( function(item) {
+        return (new Item(
+          {id: item.id, name: item.name, quantity: item.stock}
+        ));
+      })
+      
+      
+
 
     }
   },
