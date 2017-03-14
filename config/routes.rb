@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get 'shop/:query', to: 'shop#pagecontainer', as: 'shop_page'
   get 'shop', to: 'shop#pagecontainer', as: 'shop'
   
-  get 'cart' => 'cart#index'
+  get 'cart', to: 'cart#index'
+  post 'cart' => 'cart#update'
 
   #   get 'products/:id' => 'catalog#view'
 

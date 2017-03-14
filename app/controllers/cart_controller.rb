@@ -16,5 +16,12 @@ class CartController < ApplicationController
   
   def update
     #api endpoint for updating item (quantity)
+    item = Item.find(params[:item][:id])
+    
+    # Method to test real-time updating in cart
+    # Should probably have a separate cart item class,
+    # so this doesn't modify stock of the item.
+    item.stock = params[:item][:quantity]
+    item.save!
   end
 end

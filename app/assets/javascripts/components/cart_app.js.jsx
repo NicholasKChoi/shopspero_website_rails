@@ -17,6 +17,11 @@ class Item extends React.Component {
   
   handleChange(event) {
     this.props.quantity = event.target.value;
+    $.ajax({
+      url: "cart",
+      type: 'POST',
+      data: { item: { name: this.props.name, id: this.props.id, quantity: event.target.value} },
+    })
   }
 };
 
