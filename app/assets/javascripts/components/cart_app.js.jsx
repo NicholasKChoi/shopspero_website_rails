@@ -28,7 +28,7 @@ class Item extends React.Component {
 var Field = React.createClass({
     //transfer props to state on load
     getInitialState: function () {
-        return {value: this.props.value, item: this.props.item};
+        return {value: this.props.value, id: this.props.id};
     },
     //if the parent component updates the prop, force re-render
     componentWillReceiveProps: function(nextProps) {
@@ -37,7 +37,7 @@ var Field = React.createClass({
     //re-render when input changes
     _handleChange: function (e){
         this.setState({value: e.target.value});
-        this.state.item.handleChange(e);
+        // this.state.item.handleChange(e);
         // console.log(this.state.item.props.quantity);
     },
     render: function () {
@@ -63,6 +63,8 @@ var CartApp = React.createClass({
               // {id:4, name: 'D', quantity: 1}, {id:5, name: 'E', quantity: 1}, {id:6, name: 'F', quantity: 1}]
       
       // handle passed in items to cart
+      
+      // make cart table into cookies; make table json
       items: this.props.data.map( function(item) {
         return (new Item(
           {id: item.id, name: item.name, quantity: item.stock}
@@ -82,16 +84,17 @@ var CartApp = React.createClass({
 
   
   render: function() {
+    this.state.cart = new Cart(this.state.items);
     // console.log(this.props.query);
     return (
       <div className='cartApp-container'>
 
         <ul className="cartitems_list">
-          {this.state.items.map(function (item) {
+          {this.state.cart.getCart().map(function (item) {
             return (
               <li key={item.id}>
-                <Field value={item.props.quantity} item={item} onChange={this._handleChange} />
-                <ItemInfo pic={item.pic} id={item.props.id} name={item.props.name} quantity={item.props.quantity} cost={item.cost * item.quantity}/>
+                <Field value={item.quantity} id={item.id} onChange={this._handleChange} />
+                <ItemInfo pic={item.pic} id={item.id} name={item.name} quantity={item.quantity} cost={item.cost * item.quantity}/>
               </li>);
           }.bind(this)) }
         </ul>
