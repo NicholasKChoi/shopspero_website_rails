@@ -23,12 +23,27 @@ class Item extends React.Component {
       data: { item: { name: this.props.name, id: this.props.id, quantity: event.target.value} },
     })
   }
+  
+  render  () {
+    return (
+      <div className = 'iteminfo-container'>
+
+        <div className='item_desc'> <p> ID: {this.props.id}; Name: {this.props.name}; {this.props.cost} </p> </div>
+        <img src="http://i.imgur.com/Oqa7MgD.png"></img>
+
+      </div>
+    );
+  }
 };
 
 var Field = React.createClass({
     //transfer props to state on load
     getInitialState: function () {
-        return {value: this.props.value, id: this.props.id};
+        return {
+          value: this.props.value,
+          id: this.props.id,
+          user: this.props.user
+        };
     },
     //if the parent component updates the prop, force re-render
     componentWillReceiveProps: function(nextProps) {
@@ -37,8 +52,7 @@ var Field = React.createClass({
     //re-render when input changes
     _handleChange: function (e){
         this.setState({value: e.target.value});
-        // this.state.item.handleChange(e);
-        // console.log(this.state.item.props.quantity);
+        this.state.user.update(this.state.id, e.target.value);
     },
     render: function () {
         // render based on state
@@ -84,17 +98,16 @@ var CartApp = React.createClass({
 
   
   render: function() {
-    this.state.cart = new Cart(this.state.items);
-    // console.log(this.props.query);
+    var cart = new Cart(this.state.items);
     return (
       <div className='cartApp-container'>
 
         <ul className="cartitems_list">
-          {this.state.cart.getCart().map(function (item) {
+          {cart.getCart().map(function (item) {
             return (
               <li key={item.id}>
-                <Field value={item.quantity} id={item.id} onChange={this._handleChange} />
-                <ItemInfo pic={item.pic} id={item.id} name={item.name} quantity={item.quantity} cost={item.cost * item.quantity}/>
+                <Item pic={item.pic} id={item.id} name={item.name}/>
+                <Field value={item.quantity} id={item.id} user={cart} onChange={this._handleChange} />
               </li>);
           }.bind(this)) }
         </ul>
@@ -107,30 +120,14 @@ var CartApp = React.createClass({
 
 // things to impl: cartApp-*
 
-
-var ItemInfo = React.createClass({
-
-  render: function() {
-    return (
-      <div classname = 'iteminfo-container'>
-
-        <div className='item_desc'> <p> {this.props.id} {this.props.name}; {this.props.cost} </p> </div>
-        <img src="http://i.imgur.com/Oqa7MgD.png"></img>
-
-      </div>
-    );
-  }
-    
-});
-
 var CostInfo = React.createClass({
 
   render: function() {
     return (
-      <div classname = 'costinfo-container'>
-        <div classname='costtotal'>$1million dollars</div>
-        <div classname='tax_shipping'>$treefiddy</div>
-        <div classname='total'>$12 shekhels</div>
+      <div className = 'costinfo-container'>
+        <div className='costtotal'>$1million dollars</div>
+        <div className='tax_shipping'>$treefiddy</div>
+        <div className='total'>$12 shekhels</div>
       </div>
     );
   }
@@ -141,7 +138,7 @@ var CostInfo = React.createClass({
 var CheckoutButton = React.createClass({
   render: function() {
     return(
-      <div classname = 'checkout-button'>
+      <div className = 'checkout-button'>
         <button onClick={this.checkoutcart}>
         Checkout
         </button>

@@ -13,14 +13,18 @@ function update(cart, item, quantity) {
 class Cart {
     
     constructor(items) {
-        this.cart = new Object();
-        if (items != undefined) {
-            for (var i = 0; i < items.length; i++) {
-                // this.cart.push(items[i].props);
-                this.cart[items[i].props.id] = items[i].props;
+        if (Cookies.get('cart') == undefined) {
+            this.cart = new Object();
+            if (items != undefined) {
+                for (var i = 0; i < items.length; i++) {
+                    // this.cart.push(items[i].props);
+                    this.cart[items[i].props.id] = items[i].props;
+                }
             }
+            this.save();
+        } else {
+            this.getCart();
         }
-        this.save();
     }
     
     getCart() {
@@ -31,8 +35,17 @@ class Cart {
         return cartArray;
     }
     
+    add(item, quantity) {
+        if (this.cart[item] == undefined) {
+            this.cart[item]['id'] = item;
+            this.cart[item]['quantity'] = quantity;
+            this.save();
+        }
+    }
+    
     update(item, quantity) {
-        this.cart[item] = quantity;
+        this.cart[item]['quantity'] = quantity;
+        this.save();
     }
     
     save() {
