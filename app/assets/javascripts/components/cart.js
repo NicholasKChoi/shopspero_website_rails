@@ -1,23 +1,9 @@
-function createCart() {
-    
-}
-
-function getCart() {
-    
-}
-
-function update(cart, item, quantity) {
-    
-}
-
 class Cart {
-    
     constructor(items) {
         if (Cookies.get('cart') == undefined) {
             this.cart = new Object();
             if (items != undefined) {
                 for (var i = 0; i < items.length; i++) {
-                    // this.cart.push(items[i].props);
                     this.cart[items[i].props.id] = items[i].props;
                 }
             }

@@ -95,8 +95,6 @@ var CartApp = React.createClass({
     return { items: [], location: 'CA' };
   },
   
-
-  
   render: function() {
     var cart = new Cart(this.state.items);
     return (
