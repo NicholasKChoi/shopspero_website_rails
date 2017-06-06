@@ -1,4 +1,4 @@
-class Cart {
+class CartClass {
     constructor(items) {
         if (Cookies.get('cart') == undefined) {
             this.cart = new Object();

@@ -57,7 +57,7 @@ var ShopApp = React.createClass({
 
 var ItemBox = React.createClass({
   render: function() {
-    // <div className='button smtext'> Delete </div> remove for now, probably going to have delete button in edit form
+    // <div className='button smtext'> Delete </div> removed for now, probably going to have delete button in edit form
     return (
     <div className='itembox_container'>
       <div 
